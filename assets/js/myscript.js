@@ -1,0 +1,84 @@
+
+        $(function(){
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+        
+        function konfirmasi(jenis, parameter_id, kontrol){
+            Swal.fire({
+                title: 'Anda Yakin Menghapus Data '+ jenis + ' Nomor ' + parameter_id,
+                text: "Data yang terhapus tidak dapat dikembalikan",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus data ini!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = kontrol;
+                }
+            })
+        }
+
+        function keluar(parameter_id, kontrol){
+            Swal.fire({
+                title: 'Hi... ' + parameter_id,
+                text: "Anda yakin akan keluar?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, saya akan keluar!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = kontrol;
+                }
+            })
+        }
+
+        $(function () {
+            $(".npwp-dialog").click(function () {
+                var my_id_value = $(this).data('id');
+                var my_nama_value = $(this).data('nama');
+                var my_usaha_value = $(this).data('usaha');
+                var my_alamat_value = $(this).data('alamat');
+                var my_jenis_value = $(this).data('jenis');
+                $(".modal-body #nonpwpd").val(my_id_value);
+                $(".modal-body #nama").val(my_nama_value);
+                $(".modal-body #usaha").val(my_usaha_value);
+                $(".modal-body #alamat").val(my_alamat_value);
+                $(".modal-body #jenis").val(my_jenis_value);
+            })
+        });
+
+        $(document).ready(function() {
+            $('#example').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ]
+            } );
+        } );
+
+        $(document).ready(function(){
+            $('.search_select_box select').selectpicker();
+        });
+	
+        $('select').selectpicker();
